@@ -21,4 +21,10 @@ public class Usuario {
     private String username;
 
     private String password;
+
+    private String nombre;
+
+    private int edad;
+
+    private String sexo;
 }
