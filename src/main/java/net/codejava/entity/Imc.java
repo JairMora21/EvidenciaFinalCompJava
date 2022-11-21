@@ -19,7 +19,7 @@ import javax.persistence.Id;
 public class Imc implements Serializable {
 
     @Id
-    private Integer id;
+    private Long id;
     private String fecha;
     private Double peso;
     private Double altura;
@@ -28,7 +28,7 @@ public class Imc implements Serializable {
     public Imc() {
     }
 
-    public Imc(Integer id, String fecha, Double peso, Double altura, Double imcres) {
+    public Imc(Long id, String fecha, Double peso, Double altura, Double imcres) {
         this.id = id;
         this.fecha = fecha;
         this.peso = peso;
@@ -38,11 +38,11 @@ public class Imc implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

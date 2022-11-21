@@ -9,7 +9,7 @@
 	<div align="center">
 		<h1>Edit IMC</h1>
 		<br />
-		<form action="#" th:action="@{/save}" th:object="${product}"
+		<form action="#" th:action="@{/save}" th:object="${imc}"
 			method="post">
 
 			<table border="0" cellpadding="10">
@@ -20,18 +20,18 @@
 					</td>
 				</tr>			
 				<tr>				
-					<td>Estatura:</td>
+					<td>Fecha:</td>
 					<td>
-						<input type="text" th:field="*{name}" />
+						<input type="text" th:field="*{fecha}" />
 					</td>
 				</tr>
 				<tr>
 					<td>Peso:</td>
-					<td><input type="text" th:field="*{brand}" /></td>
+					<td><input type="text" th:field="*{peso}" /></td>
 				</tr>
 				<tr>
-					<td>Fecha:</td>
-					<td><input type="text" th:field="*{madein}" /></td>
+					<td>Altura:</td>
+					<td><input type="text" th:field="*{altura}" /></td>
 				</tr>
 				<tr>
 					<td colspan="2"><button type="submit">Save</button> </td>
