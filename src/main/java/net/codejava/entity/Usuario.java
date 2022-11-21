@@ -22,9 +22,5 @@ public class Usuario {
 
     private String password;
 
-    private String nombre;
 
-    private int edad;
-
-    private String sexo;
 }

@@ -1,14 +1,10 @@
 package net.codejava.controller;
 
 import java.util.List;
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import net.codejava.services.ProductService;
-import net.codejava.Usuario;
 import net.codejava.entity.Formulario;
 import net.codejava.entity.Imc;
-import net.codejava.entity.Product;
 import net.codejava.services.ImcService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,18 +19,22 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class AppController {
 
-    @Autowired
-    private ProductService service;
+
     @Autowired
     private ImcService imcService;
 
+    //En este metodo manda a llamar la pagina principal el cual mostrara la vista principal de la pagia
     @RequestMapping("/")
     public String viewHomePage(HttpSession session, Model model) {
 
         if (session.getAttribute("mySessionAttribute") != null) {
 
+            //muestra la lista de los registros de IMC
             List<Imc> imcList = imcService.listAll();
+            //se añade el atributo imcList al modelo(index.html)
             model.addAttribute("imcList", imcList);
+
+
 
             return "index";
         } else {
@@ -43,35 +43,40 @@ public class AppController {
         }
     }
 
+    //Es la pestaña de login, después de dar clic te llevará a la pestaña principal
     @RequestMapping("/login")
     public String login(HttpSession session) {
-        session.setAttribute("mySessionAttribute", "sasas");
+        session.setAttribute("mySessionAttribute", "...");
 
         return "redirect:/";
     }
 
+    //Sirve para poder añadir un nuevo registro de IMC
     @RequestMapping("/new")
     public String showNewProductPage(Model model) {
 
-
+        //LLamamos a la clase IMC para tener sus atributos
         Imc imc = new Imc();
+        //Añadimos el atributo imc al modelo (new_product)
         model.addAttribute("imc", imc);
-
 
         return "new_product";
     }
 
+    //Hace la accion de guadrar el registro
     @RequestMapping(value = "/save", method = RequestMethod.POST)
     public String saveProduct(@ModelAttribute("imc") Imc imc) {
+
+        //se hace la validacion para ver si se guarda el registro o no, en caso de que le mandara
+        //a una pantalla de error
         if(imc.getAltura() > 2.5 || imc.getAltura() < 1){
             return "/errorEstatura";
         }
         else if(imc.getPeso() <= 0){
             return "/errorPeso";
         }
-
         else {
-
+            //En el caso que sea correcto se hace el calculo para sacar el IMC y despues e imprime
             double res = imc.getPeso() / (imc.getAltura() * imc.getAltura());
             imc.setImcres(res);
             imcService.save(imc);
@@ -83,6 +88,7 @@ public class AppController {
 
     }
 
+    // se edita el IMC si hubo un error al registrarlo
     @RequestMapping("/edit/{id}")
     public ModelAndView showEditProductPage(@PathVariable(name = "id") int id) {
         ModelAndView mav = new ModelAndView("edit_product");
@@ -92,6 +98,7 @@ public class AppController {
         return mav;
     }
 
+    //borra el imc dependiendo del id
     @RequestMapping("/delete/{id}")
     public String deleteProduct(@PathVariable(name = "id") int id) {
         imcService.delete(id);
