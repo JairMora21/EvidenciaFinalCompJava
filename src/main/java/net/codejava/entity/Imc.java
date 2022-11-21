@@ -23,17 +23,17 @@ public class Imc implements Serializable {
     private String fecha;
     private Double peso;
     private Double altura;
-    private Double IMC;
+    private Double imcres;
 
     public Imc() {
     }
 
-    public Imc(Integer id, String fecha, Double peso, Double altura, Double IMC) {
+    public Imc(Integer id, String fecha, Double peso, Double altura, Double imcres) {
         this.id = id;
         this.fecha = fecha;
         this.peso = peso;
         this.altura = altura;
-        this.IMC = IMC;
+        this.imcres = imcres;
     }
 
     @Id
@@ -70,11 +70,11 @@ public class Imc implements Serializable {
         this.altura = altura;
     }
 
-    public Double getIMC() {
-        return IMC;
+    public Double getImcres() {
+        return imcres;
     }
 
-    public void setIMC(Double IMC) {
-        this.IMC = IMC;
+    public void setImcres(Double imcres) {
+        this.imcres = imcres;
     }
 }

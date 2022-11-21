@@ -18,24 +18,24 @@
                                 <thead>
                                     <tr>
                                         <th>ID</th>
+                                        <th>Fecha</th>
                                         <th>Peso</th>
                                         <th>Altura</th>
-                                        <th>Fecha</th>
                                         <th>IMC</th>
                                         <th>Actions</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr th:each="product : ${listProducts}">
-                                        <td th:text="${product.id}">Product ID</td>
-                                        <td th:text="${product.name}">Name</td>
-                                        <td th:text="${product.brand}">Brand</td>
-                                        <td th:text="${product.madein}">Made in</td>
-                                        <td th:text="${product.price}">Price</td>
+                                    <tr th:each="imc : ${imcList}">
+                                        <td th:text="${imc.id}">ID</td>
+                                        <td th:text="${imc.fecha}">Fecha</td>
+                                        <td th:text="${imc.peso}">Peso</td>
+                                        <td th:text="${imc.altura}">Altura</td>
+                                        <td th:text="${imc.imcres}">IMC</td>
                                         <td>
-                                            <a th:href="@{'/edit/' + ${product.id}}">Edit</a>
+                                            <a th:href="@{'/edit/' + ${imc.id}}">Edit</a>
                                             &nbsp;&nbsp;&nbsp;
-                                            <a th:href="@{'/delete/' + ${product.id}}">Delete</a>
+                                            <a th:href="@{'/delete/' + ${imc.id}}">Delete</a>
                                         </td>
                                     </tr>
                                 </tbody>

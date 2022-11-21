@@ -32,9 +32,9 @@ public class AppController {
     public String viewHomePage(HttpSession session, Model model) {
 
         if (session.getAttribute("mySessionAttribute") != null) {
-            //
-            List<Product> listProducts = service.listAll();
-            model.addAttribute("listProducts", listProducts);
+
+            //List<Product> listProducts = service.listAll();
+            //model.addAttribute("listProducts", listProducts);
 
             List<Imc> imcList = imcService.listAll();
             model.addAttribute("imcList", imcList);
@@ -57,10 +57,10 @@ public class AppController {
 
     @RequestMapping("/new")
     public String showNewProductPage(Model model) {
-        Product product = new Product();
-        Imc imc = new Imc();
-        model.addAttribute("product", product);
+     //   Product product = new Product();
+       // model.addAttribute("product", product);
 
+        Imc imc = new Imc();
         model.addAttribute("imc", imc);
 
 
@@ -68,10 +68,12 @@ public class AppController {
     }
 
     @RequestMapping(value = "/save", method = RequestMethod.POST)
-    public String saveProduct(@ModelAttribute("product") Product product) {
-        service.save(product);
-        //imcService.save(imc);
-        Imc imc = new Imc();
+    public String saveProduct(@ModelAttribute("imc") Imc imc) {
+        //service.save(product);
+        double res = imc.getPeso() / (imc.getAltura() * imc.getAltura());
+        imc.setImcres(res);
+        imcService.save(imc);
+        /* Imc imc = new Imc();
         Imc imc1 = new Imc( 2,  "21/01/12",  87.0,  182.0,  1.0);
         imc.setId(1);
         imc.setFecha("21/01/01");
@@ -80,21 +82,23 @@ public class AppController {
         imc.setIMC(37.0);
         imcService.save(imc);
         imcService.save(imc1);
+        */
+
         return "redirect:/";
     }
 
     @RequestMapping("/edit/{id}")
     public ModelAndView showEditProductPage(@PathVariable(name = "id") int id) {
         ModelAndView mav = new ModelAndView("edit_product");
-        Product product = service.get(id);
-        mav.addObject("product", product);
+        Imc imc = imcService.get(id);
+        mav.addObject("imc", imc);
 
         return mav;
     }
 
     @RequestMapping("/delete/{id}")
     public String deleteProduct(@PathVariable(name = "id") int id) {
-        service.delete(id);
+       // service.delete(id);
         imcService.delete(id);
         return "redirect:/";
     }

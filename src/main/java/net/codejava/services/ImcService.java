@@ -30,6 +30,7 @@ public class ImcService {
     public List<Imc> listAll() {
         return imcRepository.findAll();
     }
+
     public Imc get(long id) {
         return imcRepository.findById(id).get();
     }
